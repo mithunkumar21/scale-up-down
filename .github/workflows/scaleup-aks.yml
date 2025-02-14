@@ -25,5 +25,5 @@ jobs:
         #   allow-no-subscriptions: false
         #   audience: api://AzureADTokenExchange
         #   auth-type: SERVICE_PRINCIPAL
-        run: az login --use device-code
+        run: az login --use-device-code
 
