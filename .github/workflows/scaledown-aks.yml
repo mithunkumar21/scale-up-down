@@ -1,4 +1,4 @@
-name: AKS Scaling-up
+name: AKS Scaling-down
 
 on:
   workflow_dispatch:
@@ -22,5 +22,6 @@ jobs:
           echo "CLUSTER_NAME= ${{ secret_CLUSTER_NAME}}" >> $GITHUB_ENV
           echo "CLUSTER_RESOURCE_GROUP= ${{ secret_RESOURCE_GROUP_NAME}}" >> $GITHUB_ENV
 
-      - name: scale aks node up
-        run: az aks nodepool scale --resource-group ${{ secret_RESOURCE_GROUP_NAME}} --cluster-name ${{ secret_CLUSTER_NAME}} --nodepool-name agentpool --node-count 1   
+      - name: scale aks node down
+        run: az aks nodepool scale --resource-group ${{ secret_RESOURCE_GROUP_NAME}} --cluster-name ${{ secret_CLUSTER_NAME}} --nodepool-name agentpool --node-count 0   
+        
