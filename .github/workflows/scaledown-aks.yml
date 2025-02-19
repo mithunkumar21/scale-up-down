@@ -1,4 +1,4 @@
-name: AKS Scaling-up
+name: AKS Scaling-down
 
 on:
   workflow_dispatch:
@@ -29,4 +29,4 @@ jobs:
             --resource-group $CLUSTER_RESOURCE_GROUP \
             --cluster-name $CLUSTER_NAME \
             --nodepool-name agentpool \
-            --node-count 0
+            --node-count 1
