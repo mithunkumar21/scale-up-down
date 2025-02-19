@@ -29,4 +29,4 @@ jobs:
             --resource-group $CLUSTER_RESOURCE_GROUP \
             --cluster-name $CLUSTER_NAME \
             --nodepool-name agentpool \
-            --node-count 1
+            --node-count 2
