@@ -19,8 +19,8 @@ jobs:
 
       - name : set env variable
         run: |
-          echo "CLUSTER_NAME= ${{ secret_CLUSTER_NAME }}" >> $GITHUB_ENV
-          echo "CLUSTER_RESOURCE_GROUP= ${{ secret_RESOURCE_GROUP_NAME }}" >> $GITHUB_ENV
+          echo "CLUSTER_NAME= ${{ secret.CLUSTER_NAME }}" >> $GITHUB_ENV
+          echo "CLUSTER_RESOURCE_GROUP= ${{ secret.RESOURCE_GROUP_NAME }}" >> $GITHUB_ENV
 
       - name: scale aks node up
-        run: az aks nodepool scale --resource-group ${{ secret_RESOURCE_GROUP_NAME }} --cluster-name ${{ secret_CLUSTER_NAME }} --nodepool-name agentpool --node-count 1   
+        run: az aks nodepool scale --resource-group ${{ secret.RESOURCE_GROUP_NAME }} --cluster-name ${{ secret.CLUSTER_NAME }} --nodepool-name agentpool --node-count 1   
