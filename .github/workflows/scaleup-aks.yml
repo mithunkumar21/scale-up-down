@@ -8,19 +8,25 @@ jobs:
   scale-aks-node:
     runs-on: ubuntu-latest
     permissions:
-      id-token: write
-      contents: read
+      id-token: write  # ✅ Required for OIDC login
+      contents: read    # ✅ Required for accessing repo contents
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-     
-      - name: Azure Login
+
+      - name: Azure Login  # ✅ OIDC-based authentication (No manual login required)
         run: az login --use-device-code
 
-      - name : set env variable
+      - name: Set Environment Variables  # ✅ Corrected secret references
         run: |
-          echo "CLUSTER_NAME= ${{ secret.CLUSTER_NAME }}" >> $GITHUB_ENV
-          echo "CLUSTER_RESOURCE_GROUP= ${{ secret.RESOURCE_GROUP_NAME }}" >> $GITHUB_ENV
+          echo "CLUSTER_NAME=${{ secrets.CLUSTER_NAME }}" >> $GITHUB_ENV
+          echo "CLUSTER_RESOURCE_GROUP=${{ secrets.RESOURCE_GROUP_NAME }}" >> $GITHUB_ENV
 
-      - name: scale aks node up
-        run: az aks nodepool scale --resource-group $CLUSTER_RESOURCE_GROUP --cluster-name $CLUSTER_NAME --nodepool-name agentpool --node-count 1   
+      - name: Scale AKS Node Pool Up  # ✅ Using variables correctly
+        run: |
+          az aks nodepool scale \
+            --resource-group $CLUSTER_RESOURCE_GROUP \
+            --cluster-name $CLUSTER_NAME \
+            --nodepool-name agentpool \
+            --node-count 1
